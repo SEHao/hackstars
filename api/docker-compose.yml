@@ -1,0 +1,7 @@
+services:
+    hayhooks:
+        image: 'deepset/hayhooks:main'
+        environment:
+            - OPENAPI_API_KEY=123
+        ports:
+            - '1416:1416'
