@@ -1,0 +1,6 @@
+<select class="form-select" aria-label="Select a pipeline" (change)="updateSelectedItem($any($event.target).value)">
+  <option [value]="null" [selected]="!selectedItem()" disabled>Select a pipeline</option>
+  @for(option of options(); track option) {
+    <option [value]="option" [selected]="option === selectedItem()">{{ option }}</option>
+  }
+</select>

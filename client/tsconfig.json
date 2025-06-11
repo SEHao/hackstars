@@ -3,15 +3,16 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "useDefineForClassFields": false,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
+    "downlevelIteration": true,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
     "target": "ES2022",
     "module": "preserve"
   },

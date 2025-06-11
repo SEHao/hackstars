@@ -1,0 +1,44 @@
+<div class="main-nav-overlay hidden"></div>
+<div class="main-nav-dummy"></div>
+<nav class="main-nav mb-3">
+  <div class="main-nav-level-1 py-lg-2 mb-lg-3">
+    <div class="container">
+      <div class="main-nav-container">
+        <ul class="main-nav-segments align-items-center">
+          <li class="main-nav-segments-item active">
+            <a href="">Mijn Chatstars</a>
+            <span class="main-nav-item-icon">
+              <span class="far fa-angle-right fa-lg"></span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="main-nav-level-2 mt-lg-3">
+    <div class="container">
+      <div
+        class="main-nav-container px-lg-4 py-lg-2 shadow-sm rounded-4 rounded-top-start-0 bg-white align-items-center"
+      >
+        <ul class="main-nav-sections align-items-center">
+          <li class="main-nav-sections-item main-nav-site-id">
+            <a href="/">
+              <img src="/assets/logo.png" alt="Home" />
+            </a>
+          </li>
+        </ul>
+        <div class="main-nav-search">
+          <form>
+            <div class="form-group form-group-sm has-feedback">
+              <app-pipeline-select
+                [options]="pipelineOptions$ | async"
+                [selectedItem]="selectedPipeline$ | async"
+                (selectedItemChange)="selectPipeline($event)"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

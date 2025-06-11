@@ -1,0 +1,13 @@
+.chat-box {
+  height: 600px;
+  overflow-y: auto;
+
+  .message {
+    width: 75%;
+  }
+
+  .user-message {
+    border-radius: 16px;
+    border-top-right-radius: 0;
+  }
+}

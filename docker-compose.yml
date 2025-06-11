@@ -1,14 +1,22 @@
 services:
-    hayhooks:
-        image: 'deepset/hayhooks:main'
-        environment:
-            - OPENAPI_API_KEY=123
-        ports:
-            - '1416:1416'
-    hackstars-client:
-        build:
-            context: ./client
-            dockerfile: Dockerfile
-        ports:
-            - '8080:80'
-        container_name: hackstars-client
+  hayhooks:
+    build:
+      context: ./hayhooks
+      dockerfile: Dockerfile
+    container_name: hayhooks
+    ports:
+      - "1416:1416"
+    volumes:
+      - ./pipelines:/pipelines
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - HAYHOOKS_PIPELINES_DIR=/pipelines
+  hackstars-client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    container_name: hackstars-client
+    depends_on:
+      - hayhooks
