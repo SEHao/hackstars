@@ -9,7 +9,8 @@ import { ChatMessage } from './models/chat-message.model';
   styleUrl: './chat-box.scss',
 })
 export class ChatBox {
-  @ViewChild('#chatMessage') chatMessage!: ElementRef<HTMLDivElement>;
+  @ViewChild('chatBox') chatBox!: ElementRef<HTMLDivElement>;
+  @ViewChild('loadingMessage') loadingMessage!: ElementRef<HTMLDivElement>;
 
   messages = input<ChatMessage[]>([]);
   loading = input<boolean>(false);
@@ -24,8 +25,12 @@ export class ChatBox {
   }
 
   scrollToBottom(): void {
-    if (this.chatMessage?.nativeElement) {
-      this.chatMessage.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    const chatBoxElement = this.chatBox?.nativeElement;
+    const loadingMessageElement = this.loadingMessage?.nativeElement;
+
+    if (chatBoxElement && loadingMessageElement) {
+      const offsetTop = loadingMessageElement.offsetTop;
+      chatBoxElement.scrollTo({ top: offsetTop, behavior: 'smooth' });
     }
   }
 }
