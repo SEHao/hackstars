@@ -8,5 +8,5 @@ class PipelineWrapper(BasePipelineWrapper):
         self.pipeline = Pipeline.loads(pipeline_yaml)
 
     def run_api(self, input_text: str) -> str:
-        result = self.pipeline.run({"retriever": {"query": input_text}, "prompt_builder": {"question": input_text}, "llm": {}})
-        return result["response_llm"]["replies"][0]
+        result = self.pipeline.run({"llm": { "messages": [input_text] }, "adapter": {"initial_msg": [input_text]}})
+        return result["response_llm"]["replies"][0].text
