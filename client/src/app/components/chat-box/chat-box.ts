@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  effect,
-  ElementRef,
-  input,
-  ViewChild,
-} from '@angular/core';
+import { Component, effect, ElementRef, input, ViewChild } from '@angular/core';
 
 import { ChatMessage } from './models/chat-message.model';
 
@@ -15,16 +8,15 @@ import { ChatMessage } from './models/chat-message.model';
   templateUrl: './chat-box.html',
   styleUrl: './chat-box.scss',
 })
-export class ChatBox implements AfterViewInit {
-  @ViewChild('chatBox') chatBox!: ElementRef<HTMLDivElement>;
+export class ChatBox {
+  @ViewChild('#chatMessage') chatMessage!: ElementRef<HTMLDivElement>;
 
   messages = input<ChatMessage[]>([]);
   loading = input<boolean>(false);
 
-  ngAfterViewInit(): void {
+  constructor() {
     effect(() => {
       this.loading();
-      console.log('Messages updated:', this.messages());
       setTimeout(() => {
         this.scrollToBottom();
       });
@@ -32,9 +24,8 @@ export class ChatBox implements AfterViewInit {
   }
 
   scrollToBottom(): void {
-    if (this.chatBox?.nativeElement) {
-      const el = this.chatBox.nativeElement;
-      el.scrollTop = el.scrollHeight;
+    if (this.chatMessage?.nativeElement) {
+      this.chatMessage.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }
   }
 }

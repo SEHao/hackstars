@@ -1,15 +1,15 @@
 <div class="chat-box border rounded p-3">
   @for (message of messages(); track $index) { @if (message.role === 'bot') {
-  <div class="d-flex justify-content-start p-2">
-    <div class="message card">
+  <div #chatMessage class="d-flex justify-content-start p-2">
+    <div class="message card text-bg-secondary">
       <div class="card-body p-4">
         <p class="card-text">{{ message.content }}</p>
       </div>
     </div>
   </div>
   } @if (message.role === 'user') {
-  <div class="d-flex justify-content-end p-2">
-    <div class="message user-message card">
+  <div #chatMessage class="d-flex justify-content-end p-2">
+    <div class="message user-message card text-bg-primary">
       <div class="card-body p-4">
         <p class="card-text">{{ message.content }}</p>
       </div>
@@ -17,7 +17,7 @@
   </div>
   } } @if (loading()) {
   <div class="d-flex justify-content-start p-2">
-    <div class="message card">
+    <div class="message card text-bg-secondary">
       <div class="card-body p-4">
         <p class="card-text">
           <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span> Thinking...
