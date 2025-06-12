@@ -10,8 +10,6 @@ from haystack.dataclasses import ChatMessage
 from haystack.tools import Tool, Toolset
 from haystack_integrations.tools.mcp import MCPTool, SSEServerInfo, MCPToolset
 
-os.environ['OPENAI_API_KEY'] = ""
-
 mcp_server_info = SSEServerInfo(base_url="https://gitmcp.io/SEHao/hackstars")
 search_docs = MCPTool(name="search_hackstars_documentation", server_info=mcp_server_info)
 code_tool = MCPTool(name="search_hackstars_code", server_info=mcp_server_info)
