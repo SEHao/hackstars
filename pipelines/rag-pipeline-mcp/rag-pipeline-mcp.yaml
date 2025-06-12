@@ -1,0 +1,86 @@
+components:
+  adapter:
+    init_parameters:
+      custom_filters: {}
+      output_type: list[haystack.dataclasses.chat_message.ChatMessage]
+      template: '{{ initial_msg + initial_tool_messages + tool_messages }}'
+      unsafe: true
+    type: haystack.components.converters.output_adapter.OutputAdapter
+  llm:
+    init_parameters:
+      api_base_url: null
+      api_key:
+        env_vars:
+        - OPENAI_API_KEY
+        strict: true
+        type: env_var
+      generation_kwargs: {}
+      http_client_kwargs: null
+      max_retries: null
+      model: gpt-4o-mini
+      organization: null
+      streaming_callback: null
+      timeout: null
+      tools:
+        data:
+          connection_timeout: 30.0
+          invocation_timeout: 30.0
+          server_info:
+            base_url: https://gitmcp.io/SEHao/hackstars
+            timeout: 30
+            token: null
+            type: haystack_integrations.tools.mcp.mcp_tool.SSEServerInfo
+            url: https://gitmcp.io/SEHao/hackstars/sse
+          tool_names: &id001
+          - search_hackstars_documentation
+          - search_hackstars_code
+        type: haystack_integrations.tools.mcp.mcp_toolset.MCPToolset
+      tools_strict: false
+    type: haystack.components.generators.chat.openai.OpenAIChatGenerator
+  response_llm:
+    init_parameters:
+      api_base_url: null
+      api_key:
+        env_vars:
+        - OPENAI_API_KEY
+        strict: true
+        type: env_var
+      generation_kwargs: {}
+      http_client_kwargs: null
+      max_retries: null
+      model: gpt-4o-mini
+      organization: null
+      streaming_callback: null
+      timeout: null
+      tools: null
+      tools_strict: false
+    type: haystack.components.generators.chat.openai.OpenAIChatGenerator
+  tool_invoker:
+    init_parameters:
+      convert_result_to_json_string: false
+      raise_on_failure: true
+      tools:
+        data:
+          connection_timeout: 30.0
+          invocation_timeout: 30.0
+          server_info:
+            base_url: https://gitmcp.io/SEHao/hackstars
+            timeout: 30
+            token: null
+            type: haystack_integrations.tools.mcp.mcp_tool.SSEServerInfo
+            url: https://gitmcp.io/SEHao/hackstars/sse
+          tool_names: *id001
+        type: haystack_integrations.tools.mcp.mcp_toolset.MCPToolset
+    type: haystack.components.tools.tool_invoker.ToolInvoker
+connection_type_validation: true
+connections:
+- receiver: tool_invoker.messages
+  sender: llm.replies
+- receiver: adapter.initial_tool_messages
+  sender: llm.replies
+- receiver: adapter.tool_messages
+  sender: tool_invoker.tool_messages
+- receiver: response_llm.messages
+  sender: adapter.output
+max_runs_per_component: 100
+metadata: {}
