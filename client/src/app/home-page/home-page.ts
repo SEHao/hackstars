@@ -30,12 +30,12 @@ export class HomePage {
     this.loading = true;
     const inputMessage = this.message;
     this.messages.push({ role: 'user', content: inputMessage });
+    this.message = '';
     this.hayhooksService
       .sendQueryToPipeline(inputMessage)
       .pipe(
         finalize(() => {
           this.loading = false;
-          this.message = '';
         })
       )
       .subscribe({

@@ -6,7 +6,7 @@
       <div class="d-flex justify-content-start p-2">
         <div class="message card text-bg-secondary">
           <div class="card-body p-4">
-            <p class="card-text">{{ message.content }}</p>
+            <div class="content" [innerHTML]="message.content | markdown"></div>
           </div>
         </div>
       </div>

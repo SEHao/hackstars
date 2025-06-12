@@ -1,3 +1,7 @@
+:host {
+  --bs-link-color-rgb: var(--bs-warning-rgb);
+}
+
 .chat-box {
   height: 600px;
   overflow-y: auto;

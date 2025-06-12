@@ -1,10 +1,11 @@
 import { Component, effect, ElementRef, input, ViewChild } from '@angular/core';
 
+import { MarkdownPipe } from '../../pipes/markdown-pipe';
 import { ChatMessage } from './models/chat-message.model';
 
 @Component({
   selector: 'app-chat-box',
-  imports: [],
+  imports: [MarkdownPipe],
   templateUrl: './chat-box.html',
   styleUrl: './chat-box.scss',
 })
